@@ -29,7 +29,6 @@ function Signup() {
       signup(values)
         .then(() => {
           setSubmitting(false);
-          setOpen(true);
           navigate("/sign-in");
         })
         .catch((err) => {
