@@ -1,0 +1,141 @@
+#message {
+    --msgbg2: #e1e1e1;
+    position: relative;
+    border-radius: 1rem;
+    padding: 8px;
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+#message:focus {
+    background: #9c97c4;
+}
+
+.menu_button {
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.menu_button svg {
+    position: relative;
+    background: var(--msgbg);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 6px var(--msgbg);
+}
+
+#message:hover .menu_button {
+    display: initial;
+    opacity: 1;
+}
+
+#message_wrapper {
+    overflow-anchor: none;
+    display: grid;
+    align-self: end;
+    justify-items: end;
+    width: 100%;
+}
+
+.message_focus {
+    animation: focus 0.8s ease-in;
+}
+
+@keyframes focus {
+    from {
+        box-shadow:
+            -10px 0 0 0 #0000001f,
+            10px 0 0 0 #0000001f;
+        background: #0000001f;
+    }
+
+    to {
+        box-shadow:
+            -10px 0 0 0 #00000000,
+            10px 0 0 0 #00000000;
+        background: #00000000;
+    }
+}
+
+#message_wrapper:first-child {
+    margin-top: auto;
+}
+
+.send {
+    background: var(--brand);
+    color: white;
+}
+
+.receive {
+    background: var(--msgbg2);
+    color: black;
+}
+
+.send_deleted {
+    background: #dcd6ff;
+    color: #9c97c4;
+}
+
+.receive_deleted {
+    background: hsl(0 0% 92% / 1);
+    color: #b7b7b7;
+}
+
+.send_tag,
+.receive_tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(0, 0, 0, 0.486);
+    font-size: 11px;
+    white-space: nowrap;
+    margin-top: 2px;
+}
+
+.send_tag {
+    justify-content: flex-end;
+    margin-right: 5px;
+}
+
+.receive_tag {
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+
+#mgs_reply {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 20px;
+    gap: 3px;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 15px;
+    background: var(--brand);
+    color: white;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+#mgs_reply svg {
+    color: white;
+}
+
+#menu_wrapper {
+    position: relative;
+    display: grid;
+    height: 30px;
+    place-items: center;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+#msg_unread {
+    transition: 0.1s;
+    pointer-events: none;
+}

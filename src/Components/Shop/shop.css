@@ -1,0 +1,50 @@
+.shop_products {
+  padding: 0 2rem;
+}
+
+.shop_products label {
+  text-transform: capitalize;
+}
+
+.shop_products ul {
+  display: flex;
+  padding: 3em 0 1em 0;
+}
+
+.shop_products li {
+  display: inline;
+  padding: 0 0.5em;
+}
+
+.shop_products li div {
+  width: 1.5px;
+  height: 100%;
+}
+
+.images_tray {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  /* padding-left: 30px;  */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > img {
+  /* change div to reference your elements you put in <Masonry> */
+  background: grey;
+  margin-bottom: 30px;
+}

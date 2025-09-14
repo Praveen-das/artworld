@@ -1,0 +1,85 @@
+.uppy-ImageCropper-controls {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+.uppy-ImageCropper-controls-top {
+  bottom: unset;
+  left: unset;
+  top: 15px;
+  right: 0;
+}
+
+.uppy-ImageCropper-controls button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.uppy-ImageCropper-controls button:hover{
+  background-color: var(--brand);
+}
+
+.uppy-ImageCropper-controls button:focus {
+  background-color: var(--brand);
+  outline: none;
+}
+
+.uppy-u-reset {
+  all: initial;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+.uppy-c-btn {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  justify-content: center;
+  line-height: 1;
+  transition-duration: .3s;
+  transition-property: background-color, color;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.uppy-c-icon {
+  fill: currentColor;
+  display: inline-block;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.cropper-modal {
+  background-color: white;
+  backface-visibility: hidden;
+}
+
+.nav-controller_wrapper {
+  display: flex;
+  gap:10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: unset;
+  left: unset;
+}
+
+.nav-controller {
+  position: static;
+  transform: unset;
+  border-radius: 50px;
+}

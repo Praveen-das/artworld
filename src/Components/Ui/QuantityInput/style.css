@@ -1,0 +1,17 @@
+#qtyInput {
+    display: flex;
+    position: relative;
+    align-items: center;
+    box-shadow: 0 0 2px hsl(0, 0%, 0%, 50%);
+    border-radius: 10px;
+}
+
+.qtyInput--small {
+    width: 80px;
+    padding: 5px;
+}
+
+.qtyInput--large {
+    width: 100px;
+    padding: 9px;
+}

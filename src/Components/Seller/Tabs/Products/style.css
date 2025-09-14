@@ -1,0 +1,39 @@
+.uppy-Container,
+.uppy-Root,
+.uppy-Dashboard{
+    height: 100%;
+}
+
+.uppy-Dashboard-inner {
+    background-color: unset !important;
+    border: none !important;
+    height: 100% !important;
+}
+.uppy-Dashboard-AddFiles {
+    height: auto !important;
+    margin: 0 !important;
+    border: none !important;
+}
+.uppy-Dashboard-AddFiles-list{
+    margin-top: 20px !important;
+}
+.uppy-DashboardTab:last-child{
+    border: none;
+}
+
+.uppy-Dashboard-AddFiles-title {
+    text-align: center !important;
+    height: 200px;
+    border: 2px dashed rgba(78, 64, 236, 0.315);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 5px;
+    border-radius: 10px;
+}
+.uppy-DashboardTab-btn{
+    padding: 12px 5px !important;
+}

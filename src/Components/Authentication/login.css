@@ -1,0 +1,71 @@
+.create-account {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--brand);
+}
+
+.login_left,
+.login_right {
+  position: relative;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: white;
+  transition: transform, 1s;
+}
+
+.login_left {
+  text-align: center;
+  transform: translateX(100px);
+  /* z-index: 2; */
+}
+
+.signinStyle,
+.signupStyle {
+  position: absolute;
+  transition: transform, 0.5s 0.2s;
+}
+
+.signup_btn {
+  width: 70px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  font-size: 2em;
+  border: 1px solid rgba(152, 187, 240, 0.123);
+  box-shadow: 5px 5px 15px var(--shadow);
+  display: grid;
+  place-items: center;
+}
+
+.signup_hero {
+  background-image: url(../../Assets//Images//signupImage.jpg);
+}
+.signin_hero {
+  background-image: url(../../Assets//Images//signinImage.jpg);
+}
+
+.signup_hero,
+.signin_hero {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 2em;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  padding: 0 5em;
+  transition: transform, 1s;
+  background-size: cover;
+}
+
+#success_dialog {
+  width: 350px;
+  display: grid;
+  justify-items: center;
+  gap: 2em;
+  background: white;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  margin-top: -1rem;
+}

@@ -1,0 +1,12 @@
+#status {
+    color: white;
+    width: 90px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+}

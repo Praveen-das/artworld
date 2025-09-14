@@ -1,0 +1,154 @@
+#navbar {
+  /* background: rgb(255, 255, 255); */
+  /* position: sticky;
+    top: 0; */
+  z-index: 100;
+}
+
+.navbar {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  transition: 0.18s;
+}
+
+#nav_links {
+  display: grid;
+  place-items: center;
+}
+
+.sellerPage_link {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: -10px;
+}
+
+.sellerPage_link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--brand);
+  mask-position: center;
+  mask-size: 90% 80%;
+  mask-repeat: no-repeat;
+  translate: 0 -2px;
+  z-index: -1;
+}
+
+.nav_bottom {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.navbar .left {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navbar_middle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  z-index: 1;
+}
+
+.catagory {
+  padding-left: 2rem;
+  position: relative;
+  font-size: 0.8em;
+}
+
+.catagory::after {
+  content: url(../../../Assets/Icons/arrow-down.svg);
+  position: absolute;
+  width: 11px;
+  aspect-ratio: 1;
+  right: -20px;
+  top: 2px;
+  opacity: 0.7;
+}
+
+.navbar .right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar .left,
+.navbar .right {
+  z-index: 2;
+}
+
+.shop,
+.marketplace,
+.create,
+.login {
+  position: relative;
+}
+
+.marketplace,
+.create {
+  word-wrap: normal;
+}
+
+.login {
+  border: none;
+  background: none;
+  border-left: 1px solid rgb(107, 107, 107);
+  line-height: 20px;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+
+.shop::after,
+.marketplace::after,
+.create::after {
+  content: "";
+  position: absolute;
+  background-size: contain;
+  top: 0px;
+  left: 0rem;
+  width: 15px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.marketplace::after {
+  top: -2px;
+  width: 20px;
+  opacity: 0.7;
+}
+
+.catagory:hover,
+.shop:hover,
+.marketplace:hover,
+.create:hover,
+.login:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 425px) {
+  .navbar .right {
+    display: none !important;
+  }
+
+  .navbar {
+    height: 70px;
+    justify-content: center;
+    box-shadow: 0 0px 5px 2px var(--shadow);
+  }
+}

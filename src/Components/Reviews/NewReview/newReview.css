@@ -1,0 +1,59 @@
+.newReview .ratingAndReview {
+    margin: -8px 0 10px 0;
+}
+
+.newReview_customer--name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: -1rem;
+}
+
+.newReview p {
+    font-size: 1rem;
+    margin-top: 2em;
+}
+
+.newReview {
+    box-sizing: border-box;
+    width: 500px;
+    background: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8em;
+    padding: 3em 2em;
+}
+
+.newReview img {
+    width: 80px;
+    aspect-ratio: 1;
+    object-fit: fill;
+    /* box-shadow: 5px 0 20px 10px var(--shadow); */
+    padding: 2px;
+    border-radius: 15%;
+    display: flex;
+}
+
+.newReview #input_review {
+    font-size: 1rem;
+    outline: none;
+}
+
+.newReview_button,
+.deleteReview_button {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.deleteReview_button {
+    background: crimson !important; 
+}
+
+.rate_this_product {
+    font-size: 1rem;
+    font-weight: 500;
+}

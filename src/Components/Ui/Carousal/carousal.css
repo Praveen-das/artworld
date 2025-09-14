@@ -1,0 +1,8 @@
+.carousal {
+    position: absolute;
+    inset: 0;
+}
+
+.carousal .swiper-slide {
+    width: auto;
+}

@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@font-face {
+  font-family: "Bebas Neue";
+  ascent-override: 88%;
+  descent-override: 17.5%;
+  size-adjust: 115%;
+  src: local("BebasNeue"), url("./Assets/Font/BebasNeue.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "League Gothic";
+  font-style: normal;
+  font-weight: 100;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("./Assets/Font/LeagueGothic-Regular.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Josefin Sans";
+  ascent-override: 88%;
+  descent-override: 17.5%;
+  /* size-adjust: 115%; */
+  src: local("JosefinSans"), url("./Assets/Font/JosefinSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#App {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr 0;
+}
+
+:root {
+  /* --brand: hsl(246, 87%, 58%); */
+  /* --brand: #4622fe; */
+  --BH: 250;
+  --BS: 100%;
+
+  /* -----brand----- */
+  /* --brand: hsl(var(--BH), var(--BS), 57%); */
+  --brandLight: hsl(var(--BH), var(--BS), 90%);
+  --brand200: hsl(var(--BH), var(--BS), 70%);
+  --brand: hsl(var(--BH), var(--BS), 65%);
+  --brandDark: hsl(var(--BH), var(--BS), 55%);
+  --brandLight50: hsl(var(--BH), var(--BS), 95%);
+  --brandLight100: hsl(var(--BH), var(--BS), 90%);
+  --brandLight200: hsl(var(--BH), var(--BS), 0%);
+  --brandMain: lch(8 11 273);
+  /* --------------- */
+
+  --shadow: #b5d0ff;
+  /* --overlay: rgba(0, 0, 0, 0.836); */
+  --overlay: #5e47f9b3;
+  --brandGradient: linear-gradient(30deg, #aa23ff, #2081ff);
+  --neu: #d5dce7;
+  --header: 4.5rem;
+  --shade: #eff3f8;
+
+  --fullHeight: calc(100vh - var(--header));
+  --vSpacing: 6em;
+  --vGap: 1.5rem;
+
+  --Title: Bebas Neue;
+  --Sub: League Gothic;
+  --fontMain: Montserrat;
+}
+
+body {
+  margin: 0;
+  /* color: #33364d; */
+  /* overflow: visible !important; */
+  /* cursor:url(./Assets/Icons/brush.png),auto; */
+  /* text-shadow: 0 0 1px rgba(0, 0, 0, 0.438); */
+}
+
+* {
+  font-family: var(--fontMain);
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(0, 0, 0, 0.103);
+  color: hsl(0, 0%, 24%);
+}
+
+a {
+  color: inherit;
+}
+
+.button_text {
+  /* clip-path: polygon(0% 0%, 130% 0%, 130% 130%, 0 130%); */
+  font-size: 1em;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button_primary {
+  font-size: 1em;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 5px 5px 15px 5px var(--shadow);
+  white-space: nowrap;
+}
+
+.button_secondary {
+  font-size: 1em;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  background: var(--brand);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+  /* box-shadow: 5px 5px 15px 5px var(--shadow); */
+}
+
+.MuiRating-root * {
+  color: unset;
+}
+
+.MuiFormHelperText-root {
+  position: absolute;
+  bottom: -20px;
+  pointer-events: none;
+}
+
+.productsTray-wrapper .swiper {
+  padding-bottom: 5px !important;
+  height: 100%;
+}
+
+.productsTray-wrapper .swiper > * {
+  box-sizing: border-box !important;
+}
+
+.productsTray-wrapper .swiper .swiper-slide {
+  width: auto !important;
+  height: 100%;
+}
+
+/* //////scrollbar////// */
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  :root {
+    font-size: 14px;
+  }
+
+  .button_primary {
+    box-shadow: 5px 5px 10px 0px var(--shadow);
+  }
+}
+
+/* react-transition */
+.item-enter {
+  opacity: 0;
+}
+
+.item-enter-active {
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.item-exit {
+  opacity: 1;
+}
+
+.item-exit-active {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.noScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.img_border {
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}

@@ -1,0 +1,50 @@
+.imageUpdateBtn,
+.imageUpdateBtn_wrapper {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: var(--brand);
+    border-radius: 50px;
+    width: 35px;
+    aspect-ratio: 1;
+}
+
+.imageUpdateBtn {
+    border: none;
+    cursor: pointer;
+}
+
+.imageUpdateBtn--uploading {}
+
+.imageUpdateBtn:hover {
+    filter: brightness(1.1);
+}
+
+.MuiAccordion-root {
+    box-shadow: none !important;
+}
+
+.MuiAccordionSummary-gutters {
+    padding: 0 !important;
+}
+
+#accordion_style {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 25% auto auto;
+    align-items: center;
+    min-height: 35px;
+}
+
+.accordionDetails_style {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 40px
+}
+
+#AddNewAddress {
+    padding-bottom: 2rem;
+}

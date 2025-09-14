@@ -1,0 +1,15 @@
+
+.orderedDate{
+    color: rgba(97, 97, 97, 0.959);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.orders_right .price{
+    font-size: 1.1rem;
+    line-height: 40px;
+}
+.orders_right label{
+    margin-right: 2rem;
+    float: right;
+    white-space: nowrap;
+}

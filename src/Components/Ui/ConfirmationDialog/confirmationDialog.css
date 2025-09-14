@@ -1,0 +1,40 @@
+.dialog{
+    box-sizing: border-box;
+    background: white;
+    padding: 2rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 350px;
+}
+.dialog label{
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.dialog p{
+    color: rgb(109, 109, 109);
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 22px;
+}
+.dialog_buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1em;
+    margin-top: 10px;
+}
+.dialog .button_text,
+.dialog .button_secondary{
+    font-size: 0.7rem;
+    padding: 1em 2em;
+    border-radius: 50px;
+    width: 100%;
+}
+.dialog .button_text{
+    font-size: 0.8rem;
+}

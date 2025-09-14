@@ -1,0 +1,28 @@
+#dashboard_container td {
+    height: 5rem;
+}
+
+.admin_brandName--wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.admin_brandName {
+    font-size: 1.3rem;
+    display: flex;
+    margin: 1.3em 0 1em 0;
+    text-align: center;
+}
+
+.subscriptionBox ul {
+    margin-block: -0.5rem;
+}
+
+.subscriptionBox li {
+    margin-block: 1.5rem;
+    color: rgb(49, 49, 49);
+    list-style-type: square;
+}
+
+/* //////////////////////////// */
+
