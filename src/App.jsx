@@ -58,7 +58,6 @@ const router = createBrowserRouter(
       <Route element={<AuthRoutes />}>
         <Route path="/sign-in" element={<LoginPage />} />
         <Route path="/sign-up" element={<LoginPage />} />
-        {/* <Route path="/chat" element={<ChatPage />} /> */}
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/cart" element={<ShoppingCartPage />} />
@@ -181,7 +180,6 @@ function Layout() {
           <ScrollRestoration />
           <Suspense fallback={<LoadingScreen />}>
             <Alert />
-            {/* <ChatEngin /> */}
             <Outlet />
           </Suspense>
         </div>
