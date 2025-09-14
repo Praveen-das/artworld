@@ -12,9 +12,7 @@ import {
 
 import { Suspense, lazy, useEffect } from "react";
 import "./App.css";
-
 import { MUIContext } from "./Context/MUIContext";
-
 import LoadingScreen from "./Components/Ui/LoadingScreen";
 import Header from "./Components/Layouts/Header/Header";
 import Footer from "./Components/Layouts/Footer/Footer";
