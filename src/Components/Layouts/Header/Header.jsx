@@ -40,17 +40,17 @@ import useMediaQuery from "../../../Hooks/useMediaQuery";
 import { grey } from "@mui/material/colors";
 import Logo from "../../Ui/Logo";
 
-function Header() {
+const _props = { hideCart: false, hideSearch: false };
+
+function Header(props = _props) {
   const matches = useMediaQuery("sm");
 
-  return <nav id="navbar">{matches ? <WindowHeader /> : <MobileHeader />}</nav>;
+  return <nav id="navbar">{matches ? <WindowHeader {...props} /> : <MobileHeader {...props} />}</nav>;
 }
 
-function WindowHeader() {
-  const { pathname } = useLocation();
+function WindowHeader({ hideCart = false, hideSearch = false }) {
   const { currentUser } = useCurrentUser();
   const { handleLogout } = useAuth();
-  const isAdminRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/seller");
   const isMd = useMediaQuery("md");
 
   return (
@@ -65,15 +65,17 @@ function WindowHeader() {
       }}
     >
       <Logo />
-      {!isAdminRoute && (
+      {!hideSearch && (
         <Box width="40%" color={grey[600]}>
           <SearchWrapper mode={!isMd ? "dialog" : "dropdown"} />
         </Box>
       )}
       <Box sx={{ display: "flex", alignItems: "center", gap: 3, color: grey[900], ml: { sm: "auto" } }}>
-        <Link to="/cart">
-          <CartIcon fontSize="small" />
-        </Link>
+        {!hideCart && (
+          <Link to="/cart">
+            <CartIcon fontSize="small" />
+          </Link>
+        )}
         {currentUser.data !== null ? (
           <Select
             mainElement={
@@ -100,7 +102,7 @@ function WindowHeader() {
   );
 }
 
-function MobileHeader() {
+function MobileHeader({ hideCart = false, hideSearch = false }) {
   const { pathname } = useLocation();
   const currentUser = useCurrentUser().currentUser.data;
   const navigate = useNavigate();
@@ -135,10 +137,12 @@ function MobileHeader() {
         </Link>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, ml: "auto" }}>
-          {!isAdminRoute && <SearchWrapper mode="dialog" />}
-          <IconButton sx={{ ml: "auto" }} size="small" onClick={() => navigate("/cart")}>
-            <CartIcon sx={{ fontSize: 20 }} />
-          </IconButton>
+          {!hideSearch && <SearchWrapper mode="dialog" />}
+          {!hideCart && (
+            <IconButton sx={{ ml: "auto" }} size="small" onClick={() => navigate("/cart")}>
+              <CartIcon sx={{ fontSize: 20 }} />
+            </IconButton>
+          )}
         </Box>
 
         <Drawer sx={{ position: "fixed", inset: 0 }} open={Boolean(openDrawer)} onClose={() => toggleDrawer(false)}>
@@ -334,8 +338,6 @@ function Menu({ children, to, onClick }) {
   );
 }
 
-export default Header;
-
 function MessagesLink() {
   const unreadMessages = useStore((s) => s.unreadMessages);
   const totalUnreadMessages = useMemo(() => {
@@ -356,3 +358,5 @@ function MessagesLink() {
     </Badge>
   );
 }
+
+export default Header;

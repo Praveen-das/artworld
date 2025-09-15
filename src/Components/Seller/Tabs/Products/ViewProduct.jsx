@@ -4,9 +4,11 @@ import confirmAction from "../../../Ui/ConfirmationDialog/ConfirmationDialog";
 import { useAdmin } from "../../../../Hooks/useProducts";
 import Modal from "../../../Ui/Modal";
 import Title from "../../../Ui/Title";
+import useCurrentUser from "../../../../Hooks/useCurrentUser";
 
 export function ViewProduct({ onClose, product, setModel }) {
-  const { deleteProduct } = useAdmin();
+  const currentUser = useCurrentUser().currentUser.data;
+  const { deleteProduct } = useAdmin(currentUser?.id);
 
   const discountedPrice = product.price - (product.price * product.discount) / 100;
   const productImage = product?.images?.[0]?.url + "?tr=w-500";
@@ -17,7 +19,6 @@ export function ViewProduct({ onClose, product, setModel }) {
     });
     onClose();
   }
-
 
   return (
     <Grid container spacing={4}>

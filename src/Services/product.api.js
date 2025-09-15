@@ -52,8 +52,8 @@ export const productQuery = async (url, page, facets, order = "createdAt_asc", q
     .then((res) => res.data);
 };
 
-export const fetchAdminProducts = (query) => {
-  return axiosClient.get(`/user/products${query && "?" + query}`).then((res) => res.data);
+export const fetchAdminProducts = (userId,query) => {
+  return axiosClient.get(`/user/products/${userId}${query && "?" + query}`).then((res) => res.data);
 };
 
 export const fetchProduct = (id) => {

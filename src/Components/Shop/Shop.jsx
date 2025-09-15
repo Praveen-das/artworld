@@ -130,7 +130,7 @@ function Shop() {
                 color="primary"
                 sx={{ mt: "auto", mx: "auto" }}
                 onChange={handlePagination}
-                count={Math.ceil(total / 10)}
+                count={Math.ceil(total / 20)}
               />
             )}
           </Box>

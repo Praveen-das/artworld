@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gap, landingMotionProps, spacing, vSpacing } from "../../../const";
 import useFacets from "../../../Hooks/useFacets";
@@ -19,7 +19,7 @@ function MiniShop() {
   const navigate = useNavigate();
 
   const [tab, setTab] = useState({ id: null, idx: 0 });
-  const tabRefs = useMemo(() => [], []);
+  const tabRefs = useRef(null);
   const bgelm = useRef();
 
   const collections = facets?.collections || [];
@@ -31,19 +31,8 @@ function MiniShop() {
   };
 
   useEffect(() => {
-    if (!tabRefs.length) return;
-    const ref = tabRefs[tab.idx];
-
-    if (!ref) return null;
-
-    const rect = ref.getBoundingClientRect();
-    const parentRect = ref.parentNode.getBoundingClientRect();
-
-    const left = rect.left - parentRect.left;
-    const top = rect.top - parentRect.top;
-    const width = rect.width;
-
-    setElmPosition(top, width);
+    if (!tabRefs.current) return;
+    positionHighlight(tabRefs.current);
 
     // tabRefs.forEach((elm) => {
     //   const elmRect = elm.getBoundingClientRect();
@@ -58,13 +47,19 @@ function MiniShop() {
     // ref.parentNode.onmouseleave = () => {
     //   setElmPosition(top, width);
     // };
+  }, [collections]);
 
-    function setElmPosition(top, width) {
-      bgelm.current.style.left = left + "px";
-      bgelm.current.style.top = top + "px";
-      bgelm.current.style.width = width + "px";
-    }
-  }, [collections, tab.idx]);
+  function positionHighlight(elm) {
+    const rect = elm.getBoundingClientRect();
+    const parentRect = bgelm.current.parentNode.getBoundingClientRect();
+    const left = rect.left - parentRect.left + elm.parentNode.scrollLeft;
+    const top = rect.top - parentRect.top;
+    const width = rect.width;
+
+    bgelm.current.style.left = left + "px";
+    bgelm.current.style.top = top + "px";
+    bgelm.current.style.width = width + "px";
+  }
 
   return (
     <Box {...landingMotionProps} sx={{ mt: vSpacing, px: spacing }}>
@@ -94,7 +89,7 @@ function MiniShop() {
                 top: 0,
                 left: 0,
                 width: "0px",
-                height: `calc((100% / ${collections.length}) - ${theme.spacing(2)})`,
+                height: { xs: `100%`, md: `calc(((100% / ${collections.length}) - ${theme.spacing(2)}))` },
                 bgcolor: "primary.main",
                 borderRadius: 5,
                 zIndex: 0,
@@ -102,6 +97,7 @@ function MiniShop() {
                   "left 0.2s cubic-bezier(.4,0,.2,1), top 0.2s cubic-bezier(.4,0,.2,1), width 0.2s cubic-bezier(.4,0,.2,1)",
               })}
             />
+
             {/* Tab buttons */}
             {collections.map((s, idx) => {
               return (
@@ -109,17 +105,20 @@ function MiniShop() {
                   <Box
                     key={idx}
                     ref={(ref) => {
-                      if (!tabRefs[idx]) tabRefs[idx] = ref;
+                      if (!tabRefs.current) tabRefs.current = ref;
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
                       setTab({ id: s.id, idx });
                       path.set("collection", s.id);
+
+                      positionHighlight(e.target);
+                      e.target.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
                     }}
                     // onMouseEnter={() => setHoveredIdx(idx)}
                     sx={{
                       width: "max-content",
                       px: { xs: 2, sm: 6 },
-                      py: { xs: 0.5, sm: 2 },
+                      py: 2,
                       borderRadius: 5,
                       cursor: "pointer",
                       position: "relative",
@@ -134,6 +133,7 @@ function MiniShop() {
                       fontSize={{ xs: 14, lg: 16 }}
                       fontWeight={300}
                       color="inherit"
+                      sx={{ pointerEvents: "none" }}
                     >
                       {s.name}
                     </Typography>

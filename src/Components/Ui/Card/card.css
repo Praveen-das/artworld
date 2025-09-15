@@ -29,9 +29,9 @@
   opacity: 1;
 }
 
-.product_card:hover .product_image {
+/* .product_card:hover .product_image {
   scale: 1.1;
-}
+} */
 
 .wishlist-btn {
   transition: 0.5s;

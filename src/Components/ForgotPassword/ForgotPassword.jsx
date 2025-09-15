@@ -26,14 +26,15 @@ function ForgotPassword() {
       setIsLoading(true);
       const body = await emailSchema.validate(data);
       const res = await requestPasswordResetLink.mutateAsync(body);
-      console.log(res);
-      setEmail(body.email);
-      setSubmitted(true);
-    } catch (error) {
-      console.log(error);
-      if (error instanceof ValidationError) return setError(error.message);
-      if (error instanceof AxiosError) return setError(error.response.data.error);
-      setError(error.message);
+      if (res.status === "success") {
+        setEmail(body.email);
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.log(err);
+      if (err instanceof ValidationError) return setError(err.message);
+      if (err instanceof AxiosError) return setError(err.response.data.error);
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }

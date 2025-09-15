@@ -19,6 +19,7 @@ function TitleWithCTA({ label, onClick }) {
         <Button
           onClick={onClick}
           variant="text"
+          disableRipple
           sx={{
             borderRadius: 99999,
             textTransform: "unset",

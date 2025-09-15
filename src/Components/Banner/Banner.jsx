@@ -9,6 +9,7 @@ import img3 from "../../Assets/Images/collections_section/3.webp";
 import img4 from "../../Assets/Images/collections_section/4.webp";
 import { spacing, transition } from "../../const";
 import useMediaQuery from "../../Hooks/useMediaQuery";
+import { ChevronRight } from "lucide-react";
 
 function Banner() {
   const ref = useRef();
@@ -81,7 +82,7 @@ function Banner() {
             <Typography color="white" fontWeight={500} lineHeight={2}>
               Explore one-of-a-kind artworks that bring imagination to life. Curated with heart, crafted with soul.
             </Typography>
-            <CallToAction color="secondary" sx={{ display: { xs: "block", sm: "none" } }} />
+            <CallToAction color="secondary" sx={{ display: { xs: "flex", sm: "none" } }} />
           </Box>
         </Grid>
       </Grid>
@@ -129,7 +130,7 @@ function Banner() {
                   sx={{
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover",
+                    // objectFit: "cover",
                   }}
                   src={img2}
                 />
@@ -197,6 +198,7 @@ function CallToAction({ sx, ...props }) {
       size="large"
       sx={{ ...sx, textTransform: "unset" }}
       {...props}
+      endIcon={<ChevronRight style={{width:'0.8em',height:'0.8em'}} />}
     >
       Explore Now
     </Button>

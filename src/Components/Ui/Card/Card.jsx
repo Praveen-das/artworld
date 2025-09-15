@@ -21,6 +21,9 @@ const Card = forwardRef(({ product, sx }, ref) => {
           height: "100%",
           overflow: "hidden",
           position: "relative",
+          ":hover .product_image": {
+            scale: {sm:1.1},
+          },
         }}
       >
         <Box sx={{ p: { sm: 4 }, pb: 2, borderRadius: 5, width: "100%", height: "100%" }}>

@@ -16,20 +16,20 @@ import { MUIContext } from "./Context/MUIContext";
 import LoadingScreen from "./Components/Ui/LoadingScreen";
 import Header from "./Components/Layouts/Header/Header";
 import Footer from "./Components/Layouts/Footer/Footer";
-import SellerRegistrationPage from "./Pages/SellerRegistrationPage";
 import useCurrentUser from "./Hooks/useCurrentUser";
 import { toast } from "react-toastify";
 import { Box, Button, Alert as MuiAlert } from "@mui/material";
-import SellerOnbordingPage from "./Pages/SellerOnbordingPage";
+import ShoppingPage from "./Pages/ShoppingPage";
+import ProductPage from "./Pages/ProductPage";
 
+const SellerOnbordingPage = lazy(() => import("./Pages/SellerOnbordingPage"));
+const SellerRegistrationPage = lazy(() => import("./Pages/SellerRegistrationPage"));
 const LoginPage = lazy(() => import("./Pages/LoginPage"));
 const CollectionsPage = lazy(() => import("./Pages/CollectionsPage"));
 const HomePage = lazy(() => import("./Pages/HomePage"));
-const ProductPage = lazy(() => import("./Pages/ProductPage"));
 const CheckoutPage = lazy(() => import("./Pages/Checkout/CheckoutPages"));
 const CheckoutSuccess = lazy(() => import("./Pages/Checkout/CheckoutSuccess"));
 const ProfilePage = lazy(() => import("./Pages/ProfilePage"));
-const ShoppingPage = lazy(() => import("./Pages/ShoppingPage"));
 const SellerPage = lazy(() => import("./Pages/SellerPage"));
 const ShoppingCartPage = lazy(() => import("./Pages/ShoppingCartPage"));
 const StorePage = lazy(() => import("./Pages/StorePage"));
@@ -172,10 +172,12 @@ function Layout() {
   const isSignInPage = window.location.pathname.startsWith("/sign");
   const isSellerPage = window.location.pathname.startsWith("/seller");
 
+  const canDisplayFooter = isAdmin || isSignInPage || isSellerPage;
+
   return (
     <Box id="App">
       <MUIContext>
-        <Header />
+        <Header hideCart={canDisplayFooter} hideSearch={canDisplayFooter} />
         <div>
           <ScrollRestoration />
           <Suspense fallback={<LoadingScreen />}>
@@ -183,7 +185,7 @@ function Layout() {
             <Outlet />
           </Suspense>
         </div>
-        {isAdmin || isSignInPage || isSellerPage ? <span /> : <Footer />}
+        {canDisplayFooter ? <span /> : <Footer />}
       </MUIContext>
     </Box>
   );

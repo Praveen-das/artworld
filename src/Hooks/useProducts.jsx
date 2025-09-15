@@ -29,10 +29,9 @@ export function useProductQuery(queryKey, url, enabled = true) {
   });
 }
 
-export function useAdmin(queryString = "") {
+export function useAdmin(userId, queryString = "") {
   const queryClient = useQueryClient();
-
-  const products = useQuery(["admin_products", queryString], () => fetchAdminProducts(queryString), {
+  const products = useQuery(["admin_products", userId, queryString], () => fetchAdminProducts(userId, queryString), {
     keepPreviousData: true,
   });
 

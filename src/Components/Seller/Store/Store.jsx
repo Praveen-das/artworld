@@ -1,8 +1,9 @@
-import { Box, Button, Divider, Grid, IconButton, Tab, Tabs, Typography } from "@mui/material";
+import { Avatar, Box, Button, Divider, Grid, IconButton, Pagination, Tab, Tabs, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import React, { useEffect } from "react";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Masonry from "@mui/lab/Masonry";
-import { useProducts } from "../../../Hooks/useProducts";
+import Masonry from "react-masonry-css";
+import { useAdmin, useProducts } from "../../../Hooks/useProducts";
 import Card from "../../Ui/Card/Card";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -13,19 +14,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import useUserData from "../../../Hooks/useUserData";
 import useCurrentUser from "../../../Hooks/useCurrentUser";
 import { ShareButton } from "../../Ui/ShareButton/ShareButton";
+import { useFilter } from "../../Layouts/Sidebar/useFilter";
 
 export default function Store() {
   const { id } = useParams();
+  const { searchParams, setPage } = useFilter();
 
   const {
     user: { data: person, isLoading, isFetching },
     addFollower,
     removeFollower,
   } = useUserData(id);
+  const currentUser = useCurrentUser().currentUser.data;
   const {
-    currentUser: { data: currentUser },
-  } = useCurrentUser();
+    products: { data },
+  } = useAdmin(person?.id, searchParams.toString());
   const navigate = useNavigate();
+  const theme = useTheme();
+
+  const productList = data?.products || [];
+  const total = data?.total || 0;
 
   let icons = {
     facebook: <FacebookIcon />,
@@ -42,6 +50,10 @@ export default function Store() {
     removeFollower.mutateAsync({ id: user?.id }).then((res) => console.log(res));
   }
 
+  const handlePagination = (_, value) => {
+    setPage(value);
+  };
+
   return (
     <>
       <Grid container px={4} py={2} spacing={8}>
@@ -49,56 +61,34 @@ export default function Store() {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: "30% 1fr",
+              gridTemplateColumns: { sm: "40% 1fr",md: "30% 1fr" },
               gap: 4,
               justifyItems: "center",
+              justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <img
-              style={{
-                width: 180,
-                height: 180,
-                objectFit: "contain",
-                borderRadius: "50%",
+            <Avatar
+              sx={{
+                width: { xs: 100, sm: 150, md: 180 },
+                height: { xs: 100, sm: 150, md: 180 },
               }}
               src={person?.photo}
-              alt=""
             />
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
+                alignItems: { xs: "center", sm: "unset" },
                 gap: 2,
+                mr: "auto",
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 4,
-                }}
-              >
-                <Typography variant="heading" fontSize={26}>
-                  {person?.displayName}
-                </Typography>
-                {person?.id !== currentUser?.id && (
-                  <Button
-                    disabled={isLoading || isFetching || addFollower.isLoading || removeFollower.isLoading}
-                    onClick={handleFollowing}
-                    sx={{ textTransform: "unset", justifySelf: "right", px: 4 }}
-                    variant="contained"
-                    size="small"
-                  >
-                    {person?.isFollowedByCurrentUser ? "Unfollow" : "Follow"}
-                  </Button>
-                )}
-                <ShareButton />
-              </Box>
-              <Box display="flex" gap={2}>
+              <Typography variant="h5">{person?.displayName}</Typography>
+              <Box display="flex" alignItems="center" gap={2}>
                 <Box display="flex" gap={2}>
                   <Typography variant="h10" fontWeight={600}>
-                    {person?.product?.length}
+                    {total}
                   </Typography>
                   <Typography variant="h10">Artworks</Typography>
                 </Box>
@@ -127,11 +117,31 @@ export default function Store() {
                   ))}
                 </Box>
               )}
-              <Typography sx={{ gridColumn: "span 2" }} mt={1} variant="paragraph">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, tempore sunt fuga vel facere
-                aspernatur quis animi quasi exercitationem dolorem nulla architecto dicta excepturi earum ex sapiente
-                vero, illum soluta laboriosam quisquam suscipit voluptates distinctio. Repellendus aliquam.
-              </Typography>
+              {person?.bio && (
+                <Typography sx={{ gridColumn: "span 2" }} mt={1} variant="paragraph">
+                  {person?.bio}
+                </Typography>
+              )}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                {person?.id !== currentUser?.id && (
+                  <Button
+                    disabled={isLoading || isFetching || addFollower.isLoading || removeFollower.isLoading}
+                    onClick={handleFollowing}
+                    sx={{ textTransform: "unset", justifySelf: "right", px: 4 }}
+                    variant="contained"
+                    size="small"
+                  >
+                    {person?.isFollowedByCurrentUser ? "Unfollow" : "Follow"}
+                  </Button>
+                )}
+                <ShareButton />
+              </Box>
             </Box>
           </Box>
         </Grid>
@@ -139,13 +149,37 @@ export default function Store() {
           <Divider />
         </Grid>
         <Grid item xs={12}>
-          <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
-            <>
-              {person?.product?.map((o) => (
-                <Card sx={{ width: "100%", borderRadius: 10 }} key={o.id} product={o} />
+          <Box display="flex" flexDirection="column" sx={{ width: "100%" }}>
+            <Box
+              sx={{ "& .my-masonry-grid_column": { pl: 4 } }}
+              component={Masonry}
+              breakpointCols={{
+                default: 3,
+                [theme.breakpoints.values.sm]: 2,
+              }}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {productList.map((o, i) => (
+                <Box sx={{ width: "100%", mb: 4 }} key={o?.id}>
+                  <Card product={o} />
+                </Box>
+                // <Box component="img" width={300} sx={{ width: "100%" }} src={o.images[0]?.url} key={o.id} />
               ))}
-            </>
-          </Masonry>
+            </Box>
+
+            <Box display="flex" mt="auto !important">
+              {total > 10 && (
+                <Pagination
+                  page={Number(searchParams.get("p") || 1)}
+                  color="primary"
+                  sx={{ mt: "auto", mx: "auto" }}
+                  onChange={handlePagination}
+                  count={Math.ceil(total / 10)}
+                />
+              )}
+            </Box>
+          </Box>
         </Grid>
       </Grid>
     </>

@@ -13,6 +13,7 @@ import Card from "../../../Ui/Card";
 import TableHead from "../Components/TableHead";
 import Td from "../Components/Td";
 import ProductModal from "./ProductModal";
+import useCurrentUser from "../../../../Hooks/useCurrentUser";
 
 const skeleton = new Array(5).fill();
 
@@ -20,10 +21,11 @@ function Products() {
   const [searchParams, setSearchParams] = useState(new URLSearchParams({ p: 1 }));
   const [productModal, setProductModal] = useState(null);
   const theme = useTheme();
+  const currentUser = useCurrentUser().currentUser.data;
 
   const {
     products: { data, isLoading },
-  } = useAdmin(searchParams.toString());
+  } = useAdmin(currentUser?.id, searchParams.toString());
 
   const productList = data?.products || [];
   const total = data?.total || 0;

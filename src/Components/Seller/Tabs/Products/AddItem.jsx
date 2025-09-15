@@ -18,7 +18,7 @@ import { uploadImages } from "../../../../lib/ImageKit";
 export function AddItem({ onClose, previousData }) {
   const user = useCurrentUser().currentUser.data;
   const [progress, setProgress] = useState(0);
-  const { addProduct, updateProduct } = useAdmin();
+  const { addProduct, updateProduct } = useAdmin(user?.id);
 
   const {
     facets: { data, isLoading },
