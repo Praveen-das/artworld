@@ -156,7 +156,7 @@ const Product = () => {
             {/* product price */}
             <Box display="flex" height={50} gap={2} ml="auto" alignItems="center">
               <Typography lineHeight={1} variant="h4" fontWeight={700}>
-                ₹{discountPrice}
+                ₹{Math.round(discountPrice)}
               </Typography>
               {Boolean(product?.discount) && (
                 <Box display="flex" alignItems="center" gap={2}>

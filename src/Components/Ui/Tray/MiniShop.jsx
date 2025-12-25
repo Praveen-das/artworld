@@ -158,6 +158,7 @@ function MiniShop() {
           >
             {data?.map((item) => (
               <Card
+                key={item.id}
                 sx={{
                   minWidth: { xs: "15em", md: "100%" },
                   aspectRatio: "9/16",

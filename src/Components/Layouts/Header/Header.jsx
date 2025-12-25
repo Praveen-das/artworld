@@ -53,6 +53,8 @@ function WindowHeader({ hideCart = false, hideSearch = false }) {
   const { handleLogout } = useAuth();
   const isMd = useMediaQuery("md");
 
+  console.log(currentUser);
+
   return (
     <Box
       sx={{
@@ -76,7 +78,7 @@ function WindowHeader({ hideCart = false, hideSearch = false }) {
             <CartIcon fontSize="small" />
           </Link>
         )}
-        {currentUser.data !== null ? (
+        {currentUser.data ? (
           <Select
             mainElement={
               <IconButton size="small">

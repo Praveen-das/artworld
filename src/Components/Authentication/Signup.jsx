@@ -1,4 +1,4 @@
-import { Grid, Typography, TextField, Button, Checkbox, IconButton, Box, Divider } from "@mui/material";
+import { Grid, Typography, TextField, Button, Checkbox, IconButton, Box, Divider, styled } from "@mui/material";
 import Google from "@mui/icons-material/Google";
 import Facebook from "@mui/icons-material/Facebook";
 import Twitter from "@mui/icons-material/Twitter";
@@ -11,6 +11,7 @@ import Success from "./Success";
 import { BASE_URL } from "../../Utils/urls";
 import SocialLogin from "./SocialLogin";
 import { Link, useNavigate } from "react-router-dom";
+import StyledButton from "../Ui/StyledButton";
 
 function Signup() {
   const { signup } = useAuth();
@@ -131,22 +132,15 @@ function Signup() {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Button
+          <StyledButton
             disabled={!canSignIn || haveErrors || isSubmitting}
             fullWidth
             type="submit"
             size="large"
-            sx={{
-              background: "var(--brandGradient)",
-              borderRadius: "50px",
-              py: 1.5,
-              fontWeight: 600,
-              textTransform: "unset",
-            }}
             variant="contained"
           >
             Sign up
-          </Button>
+          </StyledButton>
         </Grid>
       </Grid>
     </form>
