@@ -1,4 +1,6 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
+import React from "react";
+import { motion } from "framer-motion";
 import TextField from "../Ui/TextField";
 import useCurrentUser from "../../Hooks/useCurrentUser";
 import { useStore } from "../../Store/Store";
@@ -53,47 +55,100 @@ export function ChangePassword({ data, onClose }) {
       validationSchema={newPasswordSchema}
       onSubmit={handleChangingPassword}
     >
-      {({ handleChange, handleSubmit, errors, touched }) => {
+      {({ handleChange, handleBlur, handleSubmit, errors, touched, isSubmitting }) => {
         return (
-          <>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            {/* Header */}
+            <Box sx={{ pb: 1 }}>
+              <Typography variant="h5" sx={{ fontWeight: 700, color: "var(--brandMain)" }}>
+                Change Password
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5, opacity: 0.8 }}>
+                Choose a secure password to keep your account safe.
+              </Typography>
+            </Box>
+
+            <Divider />
+
+            {/* Form Fields Stack */}
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <TextField
+                error={touched.old_password && errors.old_password}
+                name="old_password"
+                type="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                label="Old password"
+              />
+              <TextField
+                error={touched.password && errors.password}
+                name="password"
+                type="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                label="New password"
+              />
+              <TextField
+                error={touched.c_password && errors.c_password}
+                name="c_password"
+                type="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                label="Confirm password"
+              />
+            </Box>
+
+            <Divider sx={{ mt: 1 }} />
+
+            {/* Action buttons at the bottom */}
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "space-between",
+                justifyContent: "flex-end",
                 alignItems: "center",
-                pb: 2,
                 gap: 2,
               }}
             >
-              <Typography variant="title.primary">Change password</Typography>
-              <Button onClick={handleClose} sx={{ ml: "auto" }} size="small">
-                cancel
+              <Button
+                onClick={handleClose}
+                variant="text"
+                sx={{
+                  textTransform: "none",
+                  color: "text.secondary",
+                  fontWeight: 600,
+                  px: 3,
+                  py: 1.2,
+                  borderRadius: "10px",
+                }}
+              >
+                Cancel
               </Button>
-              <Button onClick={handleSubmit} size="small" variant="contained">
-                apply
-              </Button>
-            </Box>
-            <TextField
-              error={touched.old_password && errors.old_password}
-              name="old_password"
-              onChange={handleChange}
-              label="Old password"
-            />
-            <TextField
-              error={touched.password && errors.password}
-              name="password"
-              onChange={handleChange}
-              label="New password"
-            />
-            <TextField
-              error={touched.c_password && errors.c_password}
-              name="c_password"
-              onChange={handleChange}
-              label="Confirm password"
-            />
-          </>
-        );
-      }}
-    </Formik>
-  );
+              <Button
+                component={motion.button}
+                whileTap={{ scale: 0.97 }}
+                onClick={handleSubmit}
+                variant="contained"
+                disabled={isSubmitting || changePassword.isLoading}
+                sx={{
+                  textTransform: "none",
+                  bgcolor: "var(--brand)",
+                  fontWeight: 600,
+                  px: 4,
+                  py: 1.2,
+                  borderRadius: "10px",
+                  boxShadow: "0 6px 20px -5px rgba(94, 71, 249, 0.3)",
+                  "&:hover": {
+                    bgcolor: "var(--brandDark)",
+                    boxShadow: "0 8px 25px -3px rgba(94, 71, 249, 0.4)",
+                },
+              }}
+            >
+              Update Password
+            </Button>
+          </Box>
+        </Box>
+      );
+    }}
+  </Formik>
+);
 }

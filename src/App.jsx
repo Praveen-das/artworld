@@ -69,8 +69,8 @@ const router = createBrowserRouter(
         </Route>
         <Route path="/profile" element={<ProfilePage />} />
       </Route>
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 const App = () => <RouterProvider router={router} />;
@@ -104,15 +104,12 @@ function AdminRoutes() {
   const sellerRegistrationPage = "/seller/registration";
   const sellerOnboardingPage = "/seller/onboarding";
 
-  let isAdmin = false;
-  let isConnected = false;
-
-  isAdmin = Boolean(user?.role === "seller");
-  isConnected = Boolean(user?.onboardingStatus === "success");
+  const isAdmin = user?.role === "seller";
+  const isConnected = user?.onboardingStatus === "success";
 
   if (location.state?.status === "success") return <Outlet />;
   if (!isAdmin && currentPath !== sellerRegistrationPage) return <Navigate to={sellerRegistrationPage} {...props} />;
-  if (!isConnected && currentPath !== sellerOnboardingPage) return <Navigate to={sellerOnboardingPage} {...props} />;
+  if (isAdmin && !isConnected && currentPath !== sellerOnboardingPage) return <Navigate to={sellerOnboardingPage} {...props} />;
   if (isAdmin && isConnected && !currentPath.startsWith("/dashboard")) return <Navigate to="/dashboard" {...props} />;
 
   return <Outlet />;
@@ -162,7 +159,7 @@ function Layout() {
           autoClose: false,
           closeButton: false,
           style: { padding: 0, width: "400px" },
-        }
+        },
       );
       sessionStorage.setItem("onboarding_status", 1);
     }

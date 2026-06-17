@@ -38,8 +38,8 @@ function SellerLogin() {
     setSubmitting,
   } = useFormik({
     initialValues: {
-      email: "praveendask97@gmail.com",
-      password: "asdasdasd",
+      email: "",
+      password: "",
     },
     validationSchema: loginValidation,
     onSubmit: (values) => {

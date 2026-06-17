@@ -80,9 +80,9 @@ export default function SellerRegistraton() {
         setLoading(false);
       },
       prefill: {
-        name: "praveen das",
-        email: "sdfdsjfh2@ndsfdf.com",
-        phone_number: "8848990353",
+        name: "",
+        email: "",
+        phone_number: "",
       },
     };
 

@@ -22,33 +22,75 @@ function Banner() {
   const xRight = useSpring("0%", transition);
 
   useEffect(() => {
-    if (!isLarge) return;
+    if (!isLarge) {
+      document.body.style.removeProperty("--pHeight");
+      return;
+    }
 
-    scalingImage.current.onload = () => {
-      let spacing = Number(getComputedStyle(imgContainer.current).gap.split("px")[0]) * 2;
-      let imageWidth = scalingImage.current.clientWidth;
-      let imageHeight = scalingImage.current.clientHeight;
+    let handleScroll = null;
 
-      let scrollHeight = ref.current.clientHeight / 2;
-      let scaleMax = (window.innerWidth - spacing) / imageWidth - 1;
-      let pHeight = (imageHeight * scaleMax - spacing) / 2;
+    const setupAnimation = () => {
+      if (!scalingImage.current || !imgContainer.current || !ref.current) return;
+
+      const spacingVal = Number(getComputedStyle(imgContainer.current).gap.split("px")[0]) * 2;
+      const imageWidth = scalingImage.current.clientWidth;
+      const imageHeight = scalingImage.current.clientHeight;
+
+      if (!imageWidth || !imageHeight) return;
+
+      const scrollHeight = ref.current.clientHeight / 2;
+      const scaleMax = (window.innerWidth - spacingVal) / imageWidth - 1;
+      const pHeight = (imageHeight * scaleMax - spacingVal) / 2;
 
       document.body.style.setProperty("--pHeight", pHeight + "px");
 
-      onscroll = () => {
-        let scrollY = Math.min(window.scrollY, scrollHeight);
+      if (handleScroll) {
+        window.removeEventListener("scroll", handleScroll);
+      }
 
-        let scrollProgress = Math.floor((scrollY / (scrollHeight - spacing / 2)) * 100);
-        let scaleProgress = Math.floor((scrollY / scrollHeight) * 100);
+      handleScroll = () => {
+        const scrollY = Math.min(window.scrollY, scrollHeight);
 
-        let scale = (scaleMax / 100) * scaleProgress + 1;
+        const scrollProgress = Math.floor((scrollY / (scrollHeight - spacingVal / 2)) * 100);
+        const scaleProgress = Math.floor((scrollY / scrollHeight) * 100);
+
+        const scale = (scaleMax / 100) * scaleProgress + 1;
 
         xLeft.set(-scrollProgress + "%");
         xRight.set(scrollProgress + "%");
         scaleValue.set(100 * scale + "%");
       };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
     };
-  }, [isLarge, scaleValue]);
+
+    const img = scalingImage.current;
+    if (img) {
+      if (img.complete) {
+        setupAnimation();
+      } else {
+        img.onload = setupAnimation;
+      }
+    }
+
+    const handleResize = () => {
+      setupAnimation();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      if (img) {
+        img.onload = null;
+      }
+      if (handleScroll) {
+        window.removeEventListener("scroll", handleScroll);
+      }
+      window.removeEventListener("resize", handleResize);
+      document.body.style.removeProperty("--pHeight");
+    };
+  }, [isLarge, scaleValue, xLeft, xRight]);
 
   return (
     <Grid ref={ref} container px={spacing} mt={2} overflow="clip">
@@ -130,7 +172,6 @@ function Banner() {
                   sx={{
                     width: "100%",
                     height: "100%",
-                    // objectFit: "cover",
                   }}
                   src={img2}
                 />
@@ -148,8 +189,6 @@ function Banner() {
             </Box>
             <Box component={motion.div} style={{ x: xRight }}>
               <Image
-                component={motion.div}
-                style={{ x: xRight }}
                 sx={{
                   height: "100%",
                   objectFit: "cover",
@@ -184,8 +223,16 @@ const TextFragment = ({ children, ...props }) => {
   );
 };
 
-const Image = forwardRef(({ src, sx }, ref) => {
-  return <Box ref={ref} component="img" src={src} sx={{ width: "100%", objectFit: "cover", borderRadius: 5, ...sx }} />;
+const Image = forwardRef(({ src, sx, ...props }, ref) => {
+  return (
+    <Box
+      ref={ref}
+      component="img"
+      src={src}
+      sx={{ width: "100%", objectFit: "cover", borderRadius: 5, ...sx }}
+      {...props}
+    />
+  );
 });
 
 function CallToAction({ sx, ...props }) {
@@ -198,7 +245,7 @@ function CallToAction({ sx, ...props }) {
       size="large"
       sx={{ ...sx, textTransform: "unset" }}
       {...props}
-      endIcon={<ChevronRight style={{width:'0.8em',height:'0.8em'}} />}
+      endIcon={<ChevronRight style={{ width: '0.8em', height: '0.8em' }} />}
     >
       Explore Now
     </Button>

@@ -24,8 +24,8 @@ function Signin() {
     setSubmitting,
   } = useFormik({
     initialValues: {
-      email: "praveendask97@gmail.com",
-      password: "asdasdasd",
+      email: "",
+      password: "",
       remember_me: false,
     },
     validationSchema: loginValidation,
