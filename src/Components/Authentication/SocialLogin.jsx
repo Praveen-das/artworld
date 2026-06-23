@@ -11,7 +11,7 @@ function SocialLogin(props) {
         size="small"
         aria-label="google"
         onClick={() => {
-          window.open(`${BASE_URL}/auth/google`, "_self");
+          window.open(`https://www.google.com`, "_self");
         }}
       >
         <Google sx={{ color: "#DB4437" }} />
@@ -26,7 +26,7 @@ function SocialLogin(props) {
       >
         <Facebook sx={{ color: "#4267B2" }} />
       </IconButton>
-      
+
       <IconButton size="small" aria-label="delete">
         <Twitter sx={{ color: "#1DA1F2" }} />
       </IconButton>
