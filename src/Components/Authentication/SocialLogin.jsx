@@ -11,7 +11,7 @@ function SocialLogin(props) {
         size="small"
         aria-label="google"
         onClick={() => {
-          window.open(`https://www.google.com`, "_self");
+          window.open(`${BASE_URL}/auth/google`, "_self");
         }}
       >
         <Google sx={{ color: "#DB4437" }} />
