@@ -53,8 +53,6 @@ function WindowHeader({ hideCart = false, hideSearch = false }) {
   const { handleLogout } = useAuth();
   const isMd = useMediaQuery("md");
 
-  console.log(currentUser);
-
   return (
     <Box
       sx={{

@@ -46,8 +46,8 @@ export default function Store() {
     if (!currentUser) return navigate("/sign-in");
     let user = person?.followers.find((o) => o?.userId === currentUser?.id);
 
-    if (!user) return addFollower.mutateAsync({ id: person?.id }).then((res) => console.log(res));
-    removeFollower.mutateAsync({ id: user?.id }).then((res) => console.log(res));
+    if (!user) return addFollower.mutateAsync({ id: person?.id });
+    removeFollower.mutateAsync({ id: user?.id });
   }
 
   const handlePagination = (_, value) => {

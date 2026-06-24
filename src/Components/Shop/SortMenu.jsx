@@ -39,7 +39,7 @@ function SortMenu() {
       >
         Sort
       </Button>
-      <Modal open={open} onClose={() => setOpen(false)} onAnimationEnd={console.log}>
+      <Modal open={open} onClose={() => setOpen(false)}>
         <Stack spacing={2}>
           <Typography fontWeight={500}>SORT BY</Typography>
           <Divider />

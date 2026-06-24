@@ -18,24 +18,23 @@ export function ChangeEmail({ data, onClose }) {
   }
 
   const handleUpdate = (values, { resetForm, setFieldError, setSubmitting }) => {
-    console.log(values);
-    // updateUser
-    //   .mutateAsync(values)
-    //   .then(() => {
-    //     setAlert({
-    //       message: `${Object.keys(data)[0]} changed successfully`,
-    //       type: "success",
-    //       toggled: true,
-    //     });
-    //     resetForm();
-    //     handleClose();
-    //     setSubmitting(false);
-    //   })
-    //   .catch((err) => {
-    //     const { field, message } = err.response?.data;
-    //     setFieldError(field.toLowerCase(), message);
-    //     setSubmitting(false);
-    //   });
+    updateUser
+      .mutateAsync(values)
+      .then(() => {
+        setAlert({
+          message: `${Object.keys(data)[0]} changed successfully`,
+          type: "success",
+          toggled: true,
+        });
+        resetForm();
+        handleClose();
+        setSubmitting(false);
+      })
+      .catch((err) => {
+        const { field, message } = err.response?.data;
+        setFieldError(field.toLowerCase(), message);
+        setSubmitting(false);
+      });
   };
 
   return (

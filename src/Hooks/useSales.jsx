@@ -15,7 +15,6 @@ function useSales() {
   // Mutation for updating the status of a sales order
   const updateStatus = useMutation(_updateStatus, {
     onSuccess: (res) => {
-      console.log(res);
       queryClient.invalidateQueries(["sales_orders"]);
     },
   });
@@ -23,7 +22,6 @@ function useSales() {
   // Mutation for cancelling a sales order
   const cancelOrder = useMutation(_cancelOrder, {
     onSuccess: (res) => {
-      console.log(res);
       queryClient.invalidateQueries(["sales_orders"]);
     },
   });
