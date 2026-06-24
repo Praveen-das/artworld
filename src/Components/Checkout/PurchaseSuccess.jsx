@@ -10,33 +10,6 @@ import Title from "../Ui/Title";
 
 const PurchaseSuccess = () => {
   const orders = useLocation().state?.data || [];
-  // Mock order data for testing
-  // const orders = [
-  //   {
-  //     orderId: "ORD123456",
-  //     status: "Confirmed",
-  //     amount: 5000,
-  //     discount: 500,
-  //     price: 4500,
-  //     quantity: 1,
-  //     product: {
-  //       name: "Starry Night Canvas",
-  //       images: [{ url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb" }],
-  //     },
-  //   },
-  //   {
-  //     orderId: "ORD123457",
-  //     status: "Confirmed",
-  //     amount: 6000,
-  //     discount: 800,
-  //     price: 6000 - 800,
-  //     quantity: 2,
-  //     product: {
-  //       name: "asdsa asdasd",
-  //       images: [{ url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb" }],
-  //     },
-  //   },
-  // ];
 
   const navigate = useNavigate();
 
