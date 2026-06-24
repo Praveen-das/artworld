@@ -32,11 +32,11 @@ export function AddBio({ data, onClose }) {
     //     handleClose();
     //     setSubmitting(false);
     //   })
-      // .catch((err) => {
-      //   const { field, message } = err.response?.data;
-      //   setFieldError(field.toLowerCase(), message);
-      //   setSubmitting(false);
-      // });
+    // .catch((err) => {
+    //   const { field, message } = err.response?.data;
+    //   setFieldError(field.toLowerCase(), message);
+    //   setSubmitting(false);
+    // });
   };
 
   return (

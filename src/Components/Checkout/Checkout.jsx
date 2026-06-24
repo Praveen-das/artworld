@@ -199,7 +199,6 @@ const CheckoutBox = ({ cartItems }) => {
     const order = await axiosClient.post("/rzp/orders/purchase", order_request_obj).then((res) => res.data);
 
     if (!order || order.error) {
-      console.log(order);
       alert("Server error. Are you online?");
       return;
     }
@@ -240,7 +239,6 @@ const CheckoutBox = ({ cartItems }) => {
       modal: {
         ondismiss: async function () {
           const res = await axiosClient.post(`/orders/dismis/${order.id}`).then((res) => res.data);
-          console.log(res);
           setLoading(false);
         },
       },
@@ -250,9 +248,7 @@ const CheckoutBox = ({ cartItems }) => {
     rzp.open();
     rzp.on("payment.failed", async function (response) {
       const res = await axiosClient.post(`/orders/dismis/${order.id}`).then((res) => res.data);
-      console.log(res);
       setLoading(false);
-      console.log(response);
     });
   }
 

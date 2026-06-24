@@ -61,7 +61,7 @@ export default function Store() {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: { sm: "40% 1fr",md: "30% 1fr" },
+              gridTemplateColumns: { sm: "40% 1fr", md: "30% 1fr" },
               gap: 4,
               justifyItems: "center",
               justifyContent: "center",

@@ -98,7 +98,6 @@ export function AddItem({ onClose, previousData }) {
 
   function publishProduct(product, setSubmitting, resetForm) {
     const toastId = setPublishing(progress);
-    console.log(product);
     uploadImages(product.images)
       .then((res) => {
         if (!!res.data.length) {
@@ -471,7 +470,7 @@ function setPublishing() {
       autoClose: false,
       isLoading: false,
       customProgressBar: true,
-    }
+    },
   );
 }
 
@@ -483,7 +482,7 @@ function setSuccessToast(id) {
         Published successfully
       </Alert>
     ),
-    toastOptions
+    toastOptions,
   );
 }
 
@@ -495,7 +494,7 @@ function setErrorToast(id) {
         There's an error, please try again
       </Alert>
     ),
-    toastOptions
+    toastOptions,
   );
 }
 
@@ -507,7 +506,7 @@ function setFailedUploadsToast(failedList = []) {
           {reason}
         </Alert>
       ),
-      toastOptions
+      toastOptions,
     );
   });
 }

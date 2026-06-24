@@ -23,7 +23,6 @@ export function Address({ data, onClose }) {
       addUserAddress
         .mutateAsync(values)
         .then((res) => {
-          console.log(res.data);
           setAlert({
             message: `Address added successfully`,
             type: "success",
@@ -39,7 +38,6 @@ export function Address({ data, onClose }) {
       updateUserAddress
         .mutateAsync({ id: data?.id, ...values })
         .then((res) => {
-          console.log(res);
           setAlert({
             message: `${Object.keys(data)[0]} changed successfully`,
             type: "success",
