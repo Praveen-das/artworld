@@ -18,7 +18,7 @@ import EditsModal from "../../../Ui/Modals/EditsModal";
 import Card from "../../../Ui/Card";
 import { Network, User, Mail, Phone, IdCard, SquarePen } from "lucide-react";
 import { gap } from "../../../../const.js";
-import { uploadImages } from "../../../../lib/ImageKit.js";
+import uploadImages from "../../../../lib/ImageKit.js";
 
 const Editor = lazy(() => import("../../../ImageEditor/Editor"));
 

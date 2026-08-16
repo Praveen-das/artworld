@@ -12,7 +12,7 @@ function isObjectURL(url) {
   return objUrl.protocol === "blob:";
 }
 
-export async function uploadImages(images, callback = () => null) {
+export default async function uploadImages(images, callback = () => null) {
   const previousData = [];
   const individualProgress = {};
   let totalSize = 0;

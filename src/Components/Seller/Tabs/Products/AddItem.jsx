@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import Card from "../../../Ui/Card";
 import useCurrentUser from "../../../../Hooks/useCurrentUser";
 import Modal from "../../../Ui/Modal";
-import { uploadImages } from "../../../../lib/ImageKit";
+import uploadImages from "../../../../lib/ImageKit";
 
 export function AddItem({ onClose, previousData }) {
   const user = useCurrentUser().currentUser.data;
